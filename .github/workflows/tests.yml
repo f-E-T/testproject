@@ -2,13 +2,17 @@ name: Tests
 run-name: Running Tests
 on: [push]
 jobs:
-  Run-PHPUnit:
+  PHP-8.3:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+
       - name: Installing PHP...
         uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+
       - name: Get composer cache directory
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
@@ -22,30 +26,44 @@ jobs:
 
       - name: Install dependencies
         run: composer install --prefer-dist
+
       - name: Run PHPUnit Tests
         run: |
           ./vendor/bin/phpunit tests/
-  Run-PHPStan:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - name: Installing PHP...
-        uses: shivammathur/setup-php@v2
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-
-      - name: Install dependencies
-        run: composer install --prefer-dist
       - name: Run PHPStan
         run: |
           ./vendor/bin/phpstan analyse -c phpstan.neon
 
+  PHP-8.2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Installing PHP...
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist
+
+      - name: Run PHPUnit Tests
+        run: |
+          ./vendor/bin/phpunit tests/
+
+      - name: Run PHPStan
+        run: |
+          ./vendor/bin/phpstan analyse -c phpstan.neon
