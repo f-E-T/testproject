@@ -17,8 +17,8 @@ jobs:
           php -r "unlink('composer-setup.php');"
       - name: Installing Composer Packages...
         run: |
-          composer.phar install
+          ./composer.phar install
       - name: Run PHPUnit Tests
         run: |
-          vendor/bin/phpunit tests/
+          ./vendor/bin/phpunit tests/
       - run: echo "Tests sucessfully executed!"
