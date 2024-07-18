@@ -15,7 +15,7 @@ class Calculator
 
     public function reset(): Calculator
     {
-        $this->result = 1;
+        $this->result = 0;
 
         return $this;
     }
