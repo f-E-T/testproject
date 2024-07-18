@@ -2,7 +2,7 @@ name: Tests
 run-name: Running Tests
 on: [push]
 jobs:
-  PHP-8.3:
+  PHP-83:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -35,7 +35,7 @@ jobs:
         run: |
           ./vendor/bin/phpstan analyse -c phpstan.neon
 
-  PHP-8.2:
+  PHP-82:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
