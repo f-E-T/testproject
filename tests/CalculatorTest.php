@@ -13,4 +13,15 @@ class CalculatorTest extends TestCase
 
         $this->assertEquals(3, $calculator->getResult());
     }
+
+    public function test_reset_result()
+    {
+        $calculator = new Calculator();
+
+        $calculator->add(1, 2);
+
+        $calculator->reset();
+
+        $this->assertEquals(0, $calculator->getResult());
+    }
 }

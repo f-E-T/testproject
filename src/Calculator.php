@@ -13,6 +13,13 @@ class Calculator
         return $this;
     }
 
+    public function reset(): Calculator
+    {
+        $this->result = 0;
+
+        return $this;
+    }
+
     public function getResult(): int
     {
         return $this->result;
