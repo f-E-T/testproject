@@ -1,0 +1,23 @@
+{
+    "name": "dmr/testproject",
+    "require-dev": {
+        "phpunit/phpunit": "^11.2",
+        "phpstan/phpstan": "^1.11"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dmr\\Testproject\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Marc Schulthess",
+            "email": "fet.ca26f02b@gmail.com"
+        }
+    ],
+    "scripts": {
+        "test": "vendor/bin/phpunit tests/ --testdox --colors",
+        "analyse": "vendor/bin/phpstan analyse -c phpstan.neon"
+    },
+    "minimum-stability": "stable"
+}
